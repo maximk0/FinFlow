@@ -1,9 +1,9 @@
 public enum TransactionType {
-    INCOME,
-    EXPENSE;
+  INCOME,
+  EXPENSE;
 
-    @Override
-    public String toString() {
-        return name().toLowerCase();
-    }
+  @Override
+  public String toString() {
+    return name().toLowerCase();
+  }
 }

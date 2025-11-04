@@ -10,9 +10,9 @@ public class User implements Serializable {
     this.password = password;
   }
 
-    public Wallet getWallet() {
-        return wallet;
-    }
+  public Wallet getWallet() {
+    return wallet;
+  }
 
   public String getPassword() {
     return password;
@@ -22,8 +22,8 @@ public class User implements Serializable {
     return login;
   }
 
-    @Override
-    public String toString() {
-        return login;
-    }
+  @Override
+  public String toString() {
+    return login;
+  }
 }
