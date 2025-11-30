@@ -69,10 +69,4 @@ jobs:
               echo "Build on server..."
               ./gradlew clean build --no-daemon
   
-              echo "Stop previous app instance (if any)..."
-              pkill -f 'java -jar' || true
-  
-              echo "Start new app version..."
-              nohup java -jar build/libs/*.jar > app.log 2>&1 &
-  
               echo "Deploy finished."
