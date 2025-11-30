@@ -61,7 +61,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: |
-              cd /var/www/my-app || exit 1
+              cd /var/www/my-app/FinFlow || exit 1
   
               echo "Pull latest changes from Git..."
               git pull origin main
