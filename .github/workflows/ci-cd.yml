@@ -11,7 +11,7 @@ jobs:
     name: Build & Test (matrix)
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -61,11 +61,18 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: |
-            cd /var/www/my-app
-            # сюда ты пишешь свои команды деплоя,
-            # например: остановить старый сервис, скопировать новый .jar, перезапустить:
-            # systemctl stop my-app || true
-            # rm -f my-app.jar
-            # # здесь можно заранее клонировать репозиторий или забрать артефакт
-            # cp /some/path/build/libs/my-app.jar ./my-app.jar
-            # systemctl start my-app
+              cd /var/www/my-app || exit 1
+  
+              echo "Pull latest changes from Git..."
+              git pull origin main
+  
+              echo "Build on server..."
+              ./gradlew clean build --no-daemon
+  
+              echo "Stop previous app instance (if any)..."
+              pkill -f 'java -jar' || true
+  
+              echo "Start new app version..."
+              nohup java -jar build/libs/*.jar > app.log 2>&1 &
+  
+              echo "Deploy finished."
